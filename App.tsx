@@ -9,19 +9,23 @@ import {
   ArrowRight, 
   Briefcase, 
   Heart, 
-  ShieldCheck,
-  Zap,
-  ChevronDown,
-  Award,
-  TrendingUp,
-  Compass,
-  Star
+  ShieldCheck, 
+  Zap, 
+  ChevronDown, 
+  Award, 
+  TrendingUp, 
+  Compass, 
+  Star,
+  Play,
+  X
 } from 'lucide-react';
 
 // --- Types ---
-interface NavLink {
-  label: string;
-  href: string;
+interface Testimonial {
+  name: string;
+  role: string;
+  thumb: string;
+  videoUrl: string;
 }
 
 // --- Components ---
@@ -44,6 +48,7 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300 uppercase tracking-widest">
           <a href="#metodo" className="hover:text-amber-500 transition-colors">O Método</a>
           <a href="#publico" className="hover:text-amber-500 transition-colors">Para Quem</a>
+          <a href="#depoimentos" className="hover:text-amber-500 transition-colors">Depoimentos</a>
           <a href="#quem-e" className="hover:text-amber-500 transition-colors">O Mentor</a>
           <a href="#resultados" className="hover:text-amber-500 transition-colors">Resultados</a>
         </div>
@@ -63,7 +68,6 @@ const Navbar: React.FC = () => {
 const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-slate-950">
-      {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-amber-600/10 rounded-full blur-[120px] -mr-96 -mt-96 animate-pulse"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[100px] -ml-64 -mb-64"></div>
       
@@ -107,7 +111,6 @@ const Hero: React.FC = () => {
               className="w-full h-auto drop-shadow-2xl"
             />
           </div>
-          {/* Abstract floating elements */}
           <div className="absolute -top-8 -right-8 w-32 h-32 bg-amber-600/20 rounded-full blur-xl animate-bounce"></div>
           <div className="absolute -bottom-8 -left-8 w-48 h-48 border border-white/5 rounded-full"></div>
         </div>
@@ -237,9 +240,137 @@ const TargetAudience: React.FC = () => {
   );
 };
 
+const VideoCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  return (
+    <div className="group relative">
+      <div className="aspect-[9/16] rounded-2xl overflow-hidden bg-slate-950 border border-white/5 relative shadow-2xl">
+        {!isPlaying ? (
+          <>
+            <img 
+              src={testimonial.thumb} 
+              alt={testimonial.name} 
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 opacity-60 group-hover:opacity-100" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+            
+            {/* Play Button Overlay */}
+            <button 
+              onClick={() => setIsPlaying(true)}
+              className="absolute inset-0 flex items-center justify-center group/btn"
+              aria-label={`Assistir depoimento de ${testimonial.name}`}
+            >
+              <div className="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center shadow-2xl scale-90 group-hover/btn:scale-110 transition-transform duration-300">
+                <Play className="w-6 h-6 text-white fill-current ml-1" />
+              </div>
+            </button>
+
+            {/* Info */}
+            <div className="absolute bottom-6 left-6 right-6 pointer-events-none">
+              <p className="text-white font-bold text-lg">{testimonial.name}</p>
+              <p className="text-amber-500 text-xs font-medium uppercase tracking-wider">{testimonial.role}</p>
+            </div>
+          </>
+        ) : (
+          <div className="w-full h-full relative bg-black">
+            <button 
+              onClick={() => setIsPlaying(false)}
+              className="absolute top-4 right-4 z-20 bg-black/50 text-white p-2 rounded-full hover:bg-black transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            {/* 
+              Suporta URLs diretas de vídeo ou embed do YouTube/Vimeo. 
+              Para mudar a URL, basta alterar o array de depoimentos abaixo.
+            */}
+            {testimonial.videoUrl.includes('youtube.com') || testimonial.videoUrl.includes('youtu.be') ? (
+              <iframe 
+                src={`${testimonial.videoUrl}${testimonial.videoUrl.includes('?') ? '&' : '?'}autoplay=1`}
+                className="w-full h-full"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <video 
+                src={testimonial.videoUrl} 
+                className="w-full h-full object-cover" 
+                controls 
+                autoPlay
+              ></video>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const VideoTestimonials: React.FC = () => {
+  // ADICIONE SUAS URLs DE VÍDEO AQUI:
+  const testimonials: Testimonial[] = [
+    { 
+      name: "Lícia José Pires de Oliveira", 
+      role: "Dentista e Empresária", 
+      thumb: "https://static.wixstatic.com/media/33e307_8e5555986cdf44edad97795ecd4a8af8f003.jpg?q=80&w=800&auto=format&fit=crop",
+      videoUrl: "https://video.wixstatic.com/video/33e307_8e5555986cdf44edad97795ecd4a8af8/360p/mp4/file.mp4" // Exemplo de URL direta
+    },
+    { 
+      name: "Valderez Simensatto", 
+      role: "Advogada e psicóloga", 
+      thumb: "https://static.wixstatic.com/media/33e307_24f5585840a54f3e8bb42f4c66bcd626f003.jpg?q=80&w=800&auto=format&fit=crop",
+      videoUrl: "https://video.wixstatic.com/video/33e307_24f5585840a54f3e8bb42f4c66bcd626/360p/mp4/file.mp4" 
+    },
+    { 
+      name: "Alceu Keller", 
+      role: "Empresário", 
+      thumb: "https://static.wixstatic.com/media/33e307_a85f27acba03486082bb6cc70804a6d0f003.jpg",
+      videoUrl: "https://video.wixstatic.com/video/33e307_a85f27acba03486082bb6cc70804a6d0/360p/mp4/file.mp4"
+    },
+    { 
+      name: "Cléia Costa", 
+      role: "Executiva", 
+      thumb: "https://static.wixstatic.com/media/33e307_9eb67add48314402932e1ae38ef3d8d4f003.jpg?q=80&w=800&auto=format&fit=crop",
+      videoUrl: "https://video.wixstatic.com/video/33e307_9eb67add48314402932e1ae38ef3d8d4/360p/mp4/file.mp4" 
+    }
+  ];
+
+  return (
+    <section id="depoimentos" className="py-24 bg-slate-900 overflow-hidden">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <span className="text-amber-500 font-bold uppercase tracking-widest text-sm mb-2 block">Transformação Real</span>
+          <h2 className="text-3xl md:text-5xl font-serif text-white mb-4">Histórias de Sucesso</h2>
+          <div className="w-20 h-1 bg-amber-600 mx-auto rounded-full mb-6"></div>
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            Veja como a visão sistêmica e estratégica do Luis Pizzol impactou a vida e os negócios de profissionais experientes.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {testimonials.map((video, idx) => (
+            <VideoCard key={idx} testimonial={video} />
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <a 
+            href="https://wa.me/5517991953588" 
+            target="_blank"
+            className="inline-flex items-center gap-2 text-slate-300 hover:text-amber-500 font-semibold transition-colors group"
+          >
+            Quero ter resultados como estes
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const AboutLuis: React.FC = () => {
   return (
-    <section id="quem-e" className="py-24 bg-slate-900 relative overflow-hidden">
+    <section id="quem-e" className="py-24 bg-slate-950 relative overflow-hidden">
       <div className="absolute top-1/2 left-0 w-64 h-64 bg-amber-600/5 rounded-full blur-3xl -translate-y-1/2"></div>
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -252,7 +383,7 @@ const AboutLuis: React.FC = () => {
             </p>
             
             <p className="text-lg text-slate-300 mb-10 leading-relaxed">
-              Integro estratégia, visão sistêmica e inteligência de mercado para que profissionais e empresas não apenas cresçam, mas prosperem com consistência e segurança.
+              Integro estratégia, visão sistêmica e inteligência de mercado para que profissionais e empresas não apenas cresçam, mas prosperem com consistência e segurança. Especialização em Inteligência Sistêmica e Constelação Sistêmica Empresarial.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">
@@ -298,13 +429,12 @@ const AboutLuis: React.FC = () => {
           <div className="order-1 lg:order-2 relative">
              <div className="relative z-10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/5] md:aspect-auto">
               <img 
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop" 
+                src="https://i.ibb.co/nqLkv3H9/Whats-App-Image-2026-02-09-at-10-01-47.jpg?q=80&w=1974&auto=format&fit=crop" 
                 alt="Luis Pizzol Profissional" 
                 className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
             </div>
-            {/* Decorative background shape */}
             <div className="absolute -top-6 -right-6 w-full h-full border-2 border-amber-600/20 rounded-3xl -z-0"></div>
           </div>
         </div>
@@ -315,7 +445,7 @@ const AboutLuis: React.FC = () => {
 
 const Results: React.FC = () => {
   return (
-    <section id="resultados" className="py-24 bg-slate-950">
+    <section id="resultados" className="py-24 bg-slate-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">O que esperar desta Revolução?</h2>
@@ -329,7 +459,7 @@ const Results: React.FC = () => {
             { icon: <Target className="w-6 h-6" />, title: "Fim de Padrões", desc: "Superação de ciclos repetitivos de fracasso." },
             { icon: <Users className="w-6 h-6" />, title: "Posicionamento", desc: "Alinhamento total entre técnica e propósito." }
           ].map((item, i) => (
-            <div key={i} className="bg-slate-900 p-6 rounded-2xl border-l-4 border-amber-600 shadow-lg hover:bg-slate-800 transition-colors">
+            <div key={i} className="bg-slate-950 p-6 rounded-2xl border-l-4 border-amber-600 shadow-lg hover:bg-slate-800 transition-colors">
               <div className="text-amber-500 mb-4">{item.icon}</div>
               <h4 className="text-white font-bold text-lg mb-2">{item.title}</h4>
               <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
@@ -393,12 +523,12 @@ const App: React.FC = () => {
         <Hero />
         <Features />
         <TargetAudience />
+        <VideoTestimonials />
         <AboutLuis />
         <Results />
       </main>
       <Footer />
       
-      {/* WhatsApp Floating Button for Mobile */}
       <a 
         href="https://wa.me/5517991953588"
         target="_blank"
