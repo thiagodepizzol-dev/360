@@ -16,6 +16,8 @@ import {
   TrendingUp, 
   Compass, 
   Star,
+  Contact,
+  User,
   Play,
   X
 } from 'lucide-react';
@@ -139,7 +141,7 @@ const Features: React.FC = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
-              icon: <Heart className="w-8 h-8 text-amber-500" />,
+              icon: <User className="w-8 h-8 text-amber-500" />,
               title: "O Indivíduo",
               description: "Alinhamento interno e cura emocional para sustentar o crescimento."
             },
