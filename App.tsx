@@ -103,7 +103,7 @@ const Hero: React.FC = () => {
           </p>
         </div>
         
-        <div className="relative mt-12 lg:mt-0">
+        <div className="relative lg:mt-0">
           <div className="relative z-10 overflow-hidden max-w-md mx-auto lg:max-w-none">
             <img 
               src="https://i.ibb.co/tpK4YFwT/MENTOR-CONSTELADOR-SIST-MICO-E-ESTRAT-GICO.png" 
