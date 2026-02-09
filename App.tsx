@@ -165,6 +165,12 @@ const Features: React.FC = () => {
             </div>
           ))}
         </div>
+        {/* Impact Phrase */}
+        <div className="mt-24 text-center">
+          <p className="text-amber-500 italic font-serif text-2xl md:text-3xl leading-relaxed max-w-5xl mx-auto px-4">
+            "A cura do indivíduo potencializa o profissional e elimina padrões disfuncionais nas relações"
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -443,7 +449,12 @@ const Results: React.FC = () => {
             </div>
           ))}
         </div>
-        
+        {/* Impact Phrase */}
+        <div className="mt-24 text-center">
+          <p className="text-amber-500 italic font-serif text-2xl md:text-3xl leading-relaxed max-w-5xl mx-auto px-4">
+            "A verdadeira revolução não acontece no esforço desmedido, mas no alinhamento sistêmico que permite ao seu sucesso fluir com clareza, força e total liberdade."
+          </p>
+        </div>
         <div className="mt-20 text-center bg-amber-600/5 p-12 rounded-3xl border border-amber-600/20 max-w-4xl mx-auto">
           <p className="text-slate-300 text-xl font-serif italic mb-8 leading-relaxed">
             "Se você sente que já tentou muito, já aprendeu bastante, mas algo ainda não se sustenta apesar de todo o esforço... Este é o momento do alinhamento."
@@ -461,6 +472,8 @@ const Results: React.FC = () => {
             </p>
           </div>
         </div>
+
+        
       </div>
     </section>
   );
