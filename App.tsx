@@ -67,22 +67,22 @@ const Navbar: React.FC = () => {
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-slate-950">
+    <section className="relative min-h-screen flex items-center pt-32 pb-20 lg:pt-20 overflow-hidden bg-slate-950">
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-amber-600/10 rounded-full blur-[120px] -mr-96 -mt-96 animate-pulse"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[100px] -ml-64 -mb-64"></div>
       
       <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-        <div className="text-left">
+        <div className="text-center lg:text-left">
           <span className="inline-block px-4 py-1.5 rounded-full bg-amber-600/20 text-amber-500 text-xs font-bold uppercase tracking-wider mb-6 border border-amber-600/30">
             Mentoria em Grupo
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white leading-tight mb-8">
             Revolução Profissional <span className="text-amber-500 italic block">360º</span>
           </h1>
-          <p className="text-xl text-slate-400 mb-10 max-w-xl leading-relaxed">
+          <p className="text-xl text-slate-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
             Pare de lutar contra o fluxo. Uma mentoria sistêmica para quem já possui o saber, mas não converte esforço em <span className="text-white font-semibold">renda e leveza</span>.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <a 
               href="https://wa.me/5517991953588"
               className="group flex items-center justify-center gap-3 bg-amber-600 hover:bg-amber-500 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all shadow-xl hover:shadow-amber-600/40"
@@ -97,26 +97,26 @@ const Hero: React.FC = () => {
               Conhecer Método
             </a>
           </div>
-          <p className="mt-8 text-slate-500 text-sm flex items-center gap-2">
+          <p className="mt-8 text-slate-500 text-sm flex items-center justify-center lg:justify-start gap-2">
             <Users className="w-4 h-4 text-amber-600" />
             Grupo exclusivo de apenas 15 pessoas
           </p>
         </div>
         
-        <div className="relative hidden lg:block">
-          <div className="relative z-10 overflow-hidden">
+        <div className="relative mt-12 lg:mt-0">
+          <div className="relative z-10 overflow-hidden max-w-md mx-auto lg:max-w-none">
             <img 
               src="https://i.ibb.co/tpK4YFwT/MENTOR-CONSTELADOR-SIST-MICO-E-ESTRAT-GICO.png" 
               alt="Luis Pizzol Mentor" 
               className="w-full h-auto drop-shadow-2xl"
             />
           </div>
-          <div className="absolute -top-8 -right-8 w-32 h-32 bg-amber-600/20 rounded-full blur-xl animate-bounce"></div>
-          <div className="absolute -bottom-8 -left-8 w-48 h-48 border border-white/5 rounded-full"></div>
+          <div className="absolute -top-8 -right-8 w-24 md:w-32 h-24 md:h-32 bg-amber-600/20 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute -bottom-8 -left-8 w-32 md:w-48 h-32 md:h-48 border border-white/5 rounded-full"></div>
         </div>
       </div>
       
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-slate-500">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce text-slate-500 hidden md:block">
         <ChevronDown />
       </div>
     </section>
@@ -267,7 +267,7 @@ const VideoCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => {
             </button>
 
             {/* Info */}
-            <div className="absolute bottom-6 left-6 right-6 pointer-events-none">
+            <div className="absolute bottom-6 left-6 right-6 pointer-events-none text-left">
               <p className="text-white font-bold text-lg">{testimonial.name}</p>
               <p className="text-amber-500 text-xs font-medium uppercase tracking-wider">{testimonial.role}</p>
             </div>
@@ -280,10 +280,6 @@ const VideoCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => {
             >
               <X className="w-5 h-5" />
             </button>
-            {/* 
-              Suporta URLs diretas de vídeo ou embed do YouTube/Vimeo. 
-              Para mudar a URL, basta alterar o array de depoimentos abaixo.
-            */}
             {testimonial.videoUrl.includes('youtube.com') || testimonial.videoUrl.includes('youtu.be') ? (
               <iframe 
                 src={`${testimonial.videoUrl}${testimonial.videoUrl.includes('?') ? '&' : '?'}autoplay=1`}
@@ -307,13 +303,12 @@ const VideoCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => {
 };
 
 const VideoTestimonials: React.FC = () => {
-  // ADICIONE SUAS URLs DE VÍDEO AQUI:
   const testimonials: Testimonial[] = [
     { 
       name: "Lícia José Pires de Oliveira", 
       role: "Dentista e Empresária", 
       thumb: "https://static.wixstatic.com/media/33e307_8e5555986cdf44edad97795ecd4a8af8f003.jpg?q=80&w=800&auto=format&fit=crop",
-      videoUrl: "https://video.wixstatic.com/video/33e307_8e5555986cdf44edad97795ecd4a8af8/360p/mp4/file.mp4" // Exemplo de URL direta
+      videoUrl: "https://video.wixstatic.com/video/33e307_8e5555986cdf44edad97795ecd4a8af8/360p/mp4/file.mp4" 
     },
     { 
       name: "Valderez Simensatto", 
@@ -336,9 +331,9 @@ const VideoTestimonials: React.FC = () => {
   ];
 
   return (
-    <section id="depoimentos" className="py-24 bg-slate-900 overflow-hidden">
+    <section id="depoimentos" className="py-24 bg-slate-900 overflow-hidden text-center">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className="mb-16">
           <span className="text-amber-500 font-bold uppercase tracking-widest text-sm mb-2 block">Transformação Real</span>
           <h2 className="text-3xl md:text-5xl font-serif text-white mb-4">Histórias de Sucesso</h2>
           <div className="w-20 h-1 bg-amber-600 mx-auto rounded-full mb-6"></div>
@@ -353,7 +348,7 @@ const VideoTestimonials: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-16">
           <a 
             href="https://wa.me/5517991953588" 
             target="_blank"
@@ -374,9 +369,9 @@ const AboutLuis: React.FC = () => {
       <div className="absolute top-1/2 left-0 w-64 h-64 bg-amber-600/5 rounded-full blur-3xl -translate-y-1/2"></div>
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1">
+          <div className="order-2 lg:order-1 text-center lg:text-left">
             <h2 className="text-3xl md:text-5xl font-serif text-white mb-6">Quem é Luis Pizzol?</h2>
-            <div className="w-20 h-1.5 bg-amber-600 rounded-full mb-8"></div>
+            <div className="w-20 h-1.5 bg-amber-600 rounded-full mb-8 mx-auto lg:mx-0"></div>
             
             <p className="text-lg text-slate-300 mb-6 leading-relaxed">
               Com <span className="text-white font-bold">25 anos de experiência</span> como executivo de um grupo empresarial e mais de <span className="text-white font-bold">20 anos</span> atuando como consultor estratégico e mentor, ajudo profissionais e empresas a crescerem de forma sustentável e alinhada com seus propósitos.
@@ -386,43 +381,23 @@ const AboutLuis: React.FC = () => {
               Integro estratégia, visão sistêmica e inteligência de mercado para que profissionais e empresas não apenas cresçam, mas prosperem com consistência e segurança. Especialização em Inteligência Sistêmica e Constelação Sistêmica Empresarial.
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-amber-600/10 rounded-xl">
-                  <Award className="w-6 h-6 text-amber-500" />
+            <div className="grid sm:grid-cols-2 gap-6 text-left">
+              {[
+                { icon: <Award className="w-6 h-6 text-amber-500" />, title: "Especialista Sistêmico", desc: "Inteligência e Constelação Sistêmica Empresarial." },
+                { icon: <TrendingUp className="w-6 h-6 text-amber-500" />, title: "Visão de Mercado", desc: "Duas décadas de consultoria estratégica real." },
+                { icon: <Compass className="w-6 h-6 text-amber-500" />, title: "Foco em Propósito", desc: "Alinhamento entre resultados e realização pessoal." },
+                { icon: <Star className="w-6 h-6 text-amber-500" />, title: "Mentor Estratégico", desc: "Acompanhamento direto baseado em experiência prática." }
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-4">
+                  <div className="p-3 bg-amber-600/10 rounded-xl shrink-0">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">{item.title}</h4>
+                    <p className="text-slate-400 text-sm">{item.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-white font-bold mb-1">Especialista Sistêmico</h4>
-                  <p className="text-slate-400 text-sm">Inteligência e Constelação Sistêmica Empresarial.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-amber-600/10 rounded-xl">
-                  <TrendingUp className="w-6 h-6 text-amber-500" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold mb-1">Visão de Mercado</h4>
-                  <p className="text-slate-400 text-sm">Duas décadas de consultoria estratégica real.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-amber-600/10 rounded-xl">
-                  <Compass className="w-6 h-6 text-amber-500" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold mb-1">Foco em Propósito</h4>
-                  <p className="text-slate-400 text-sm">Alinhamento entre resultados e realização pessoal.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-amber-600/10 rounded-xl">
-                  <Star className="w-6 h-6 text-amber-500" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold mb-1">Mentor Estratégico</h4>
-                  <p className="text-slate-400 text-sm">Acompanhamento direto baseado em experiência prática.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           
@@ -468,13 +443,13 @@ const Results: React.FC = () => {
         </div>
         
         <div className="mt-20 text-center bg-amber-600/5 p-12 rounded-3xl border border-amber-600/20 max-w-4xl mx-auto">
-          <p className="text-slate-300 text-xl font-serif italic mb-8">
+          <p className="text-slate-300 text-xl font-serif italic mb-8 leading-relaxed">
             "Se você sente que já tentou muito, já aprendeu bastante, mas algo ainda não se sustenta apesar de todo o esforço... Este é o momento do alinhamento."
           </p>
           <div className="flex flex-col items-center gap-4">
              <a 
               href="https://wa.me/5517991953588"
-              className="flex items-center gap-3 bg-amber-600 hover:bg-amber-500 text-white px-10 py-5 rounded-2xl text-xl font-bold transition-all shadow-xl"
+              className="flex items-center gap-3 bg-amber-600 hover:bg-amber-500 text-white px-10 py-5 rounded-2xl text-xl font-bold transition-all shadow-xl text-center"
             >
               <MessageCircle className="w-6 h-6" />
               Falar com Luis no WhatsApp
@@ -493,7 +468,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-950 py-12 border-t border-white/5">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-        <div>
+        <div className="text-center md:text-left">
           <div className="text-white font-serif text-2xl font-bold tracking-tight mb-2">
             LUIS <span className="text-amber-500">PIZZOL</span>
           </div>
@@ -533,7 +508,7 @@ const App: React.FC = () => {
         href="https://wa.me/5517991953588"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-400 text-white p-4 rounded-full shadow-2xl md:hidden animate-pulse"
+        className="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-400 text-white p-4 rounded-full shadow-2xl md:hidden transition-transform active:scale-95"
       >
         <MessageCircle className="w-8 h-8" />
       </a>
